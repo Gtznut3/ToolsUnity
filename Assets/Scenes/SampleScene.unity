@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028462, g: 0.22571574, b: 0.30692294, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028465, g: 0.22571574, b: 0.30692294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3660,10 +3660,7 @@ MonoBehaviour:
   currentIndex: 3
   isInReverse: 0
   MeshHolder: {fileID: 1481952212}
-  attackRadius: 2
-  detectionRadius: 5
-  damagesPower: 1
-  castcooldown: 1
+  stats: {fileID: 11400000, guid: 8c557774d6071e94fa34f8f0220c942e, type: 2}
 --- !u!114 &690843131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5367,10 +5364,7 @@ MonoBehaviour:
   currentIndex: 4
   isInReverse: 1
   MeshHolder: {fileID: 227516981}
-  attackRadius: 2
-  detectionRadius: 5
-  damagesPower: 1
-  castcooldown: 1
+  stats: {fileID: 11400000, guid: 8c557774d6071e94fa34f8f0220c942e, type: 2}
 --- !u!114 &993933949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5578,10 +5572,7 @@ MonoBehaviour:
   currentIndex: 3
   isInReverse: 0
   MeshHolder: {fileID: 1715686932}
-  attackRadius: 2
-  detectionRadius: 5
-  damagesPower: 1
-  castcooldown: 1
+  stats: {fileID: 11400000, guid: 8c557774d6071e94fa34f8f0220c942e, type: 2}
 --- !u!114 &1025294061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6177,10 +6168,7 @@ MonoBehaviour:
   currentIndex: 1
   isInReverse: 0
   MeshHolder: {fileID: 400281819}
-  attackRadius: 2
-  detectionRadius: 5
-  damagesPower: 1
-  castcooldown: 1
+  stats: {fileID: 11400000, guid: 8c557774d6071e94fa34f8f0220c942e, type: 2}
 --- !u!114 &1202240542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9813,10 +9801,7 @@ MonoBehaviour:
   currentIndex: 1
   isInReverse: 0
   MeshHolder: {fileID: 506718248}
-  attackRadius: 2.5
-  detectionRadius: 5
-  damagesPower: 5
-  castcooldown: 1.8
+  stats: {fileID: 11400000, guid: d407388cf245c2346a138987c12cfa5b, type: 2}
 --- !u!114 &1890742461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11391,10 +11376,7 @@ MonoBehaviour:
   currentIndex: 6
   isInReverse: 0
   MeshHolder: {fileID: 2073728399}
-  attackRadius: 1.2
-  detectionRadius: 5
-  damagesPower: 0.3
-  castcooldown: 0.5
+  stats: {fileID: 11400000, guid: fb1578c95877f1640834d9b8e51cad00, type: 2}
 --- !u!114 &2103932148
 MonoBehaviour:
   m_ObjectHideFlags: 0

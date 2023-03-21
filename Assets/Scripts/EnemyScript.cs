@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,15 +13,17 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Transform MeshHolder;
     private GameObject Player;
 
-    [SerializeField] private float attackRadius;
-    [SerializeField] private float detectionRadius;
-    [SerializeField] private float damagesPower;
-    [SerializeField] private float castcooldown;
+    //[SerializeField] private float attackRadius;
+    //[SerializeField] private float detectionRadius;
+    //[SerializeField] private float damagesPower;
+    //[SerializeField] private float castcooldown;
     private float lastcast;
+
+    [SerializeField] private EnemyStats stats;
 
     public float AttackRadius
     {
-        get { return attackRadius; }
+        get { return stats.attackRadius; }
     }
 
     void Start()
@@ -75,7 +78,7 @@ public class EnemyScript : MonoBehaviour
 
         if (Player)
         {
-            if (Vector3.Distance(transform.position, Player.transform.position) < detectionRadius)
+            if (Vector3.Distance(transform.position, Player.transform.position) < stats.detectionRadius)
             {
                 agent.SetDestination(Player.transform.position);
             }
@@ -84,11 +87,30 @@ public class EnemyScript : MonoBehaviour
                 agent.SetDestination(path.GetSpotAt(currentIndex));
             }
 
-            if (lastcast + castcooldown <= Time.time && Vector3.Distance(transform.position, Player.transform.position) < attackRadius)
+            if (lastcast + stats.castcooldown <= Time.time && Vector3.Distance(transform.position, Player.transform.position) < stats.attackRadius)
             {
-                Player.GetComponent<Health>().ImpactHP(-damagesPower);
+                Player.GetComponent<Health>().ImpactHP(-stats.damagesPower);
                 lastcast = Time.time;
             }
         }
+    }
+
+    public void UpdateComponents()
+    {
+        GetComponentInChildren<MeshRenderer>().material = stats.meshColor;
+        MeshHolder.localScale = Vector3.one * stats.size;
+        agent.speed = stats.speed;
+    }
+
+    public void SwapStats(EnemyStats newStats)
+    {
+        stats = newStats;
+        UpdateComponents();
+    }
+
+    public void SetPath(EnemyPath newPath, int newIndex)
+    {
+        path = newPath;
+        currentIndex = newIndex;
     }
 }
