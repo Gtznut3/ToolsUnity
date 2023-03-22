@@ -21,7 +21,7 @@ public class Recoltable : MonoBehaviour
             manager.RemoveRecoltable(this);
             Destroy(gameObject);
         }
-    }
+    }   
 
     private void OnDrawGizmos()
     {
