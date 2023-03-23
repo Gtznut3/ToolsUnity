@@ -1,11 +1,16 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GroundManager : EditorWindow
 {
     public GameObject groundPrefab;
+    public GameObject RampePrefab;
     Vector3 newSize = Vector3.one;
+    List<string> rampname = new List<string>();
     float height = 0;
+    int nbrderamp = 1;
 
     [MenuItem("Window/Sol Window")]
     public static void ShowWindow()
@@ -29,22 +34,21 @@ public class GroundManager : EditorWindow
         #region RockGeneration
         EditorGUI.LabelField(new Rect(3, 1, position.width, 22), "Création d'un sol a hauteur désirez", TitleStyle);
 
-        groundPrefab = EditorGUI.ObjectField(new Rect(3, 25, position.width, 20), "Prefab map", groundPrefab, typeof(GameObject), false) as GameObject;
-        height = EditorGUI.FloatField(new Rect(3, 75, position.width, 22), "choissisez la hauteur", height);
-        newSize = EditorGUI.Vector3Field(new Rect(3, 125, 200, 22), "choissisez la size de votre sol en X et Z", newSize);
-
+        groundPrefab = EditorGUI.ObjectField(new Rect(3, 25, position.width, 20), "Prefab sol", groundPrefab, typeof(GameObject), false) as GameObject;
+        nbrderamp = EditorGUI.IntField(new Rect(3, 75, position.width, 22), "nombre de ramp", nbrderamp);
+        height = EditorGUI.FloatField(new Rect(3, 125, position.width, 22), "choissisez la hauteur", height);
 
         if (height < 1)
         {
-            EditorGUI.LabelField(new Rect(3, 100, position.width, 20), "/!\\ La hauteur ne peut pas être inférieur à 1 /!\\", ErrorStyle);
+            EditorGUI.LabelField(new Rect(3, 150, position.width, 20), "/!\\ La hauteur ne peut pas être inférieur à 1 /!\\", ErrorStyle);
         }
         else if (!groundPrefab)
         {
-            EditorGUI.LabelField(new Rect(3, 50, position.width, 20), "/!\\ Pas de prefab choisi! /!\\", ErrorStyle);
+            EditorGUI.LabelField(new Rect(3, 50, position.width, 20), "/!\\ Pas de prefab de sol choisi! /!\\", ErrorStyle);
         }
-        else if (newSize.y != 1)
+        else if (nbrderamp < 0 || nbrderamp > 4)
         {
-            EditorGUI.LabelField(new Rect(3, 175, position.width, 20), "/!\\ Le sol ne peut pas avoir une size Y différente de 1 /!\\", ErrorStyle);
+            EditorGUI.LabelField(new Rect(3, 100, position.width, 20), "/!\\ Pas plus de 4 ramp et moins de 0! /!\\", ErrorStyle);
         }
         else
         {
@@ -60,10 +64,19 @@ public class GroundManager : EditorWindow
     {
 
         GameObject ground = Instantiate(groundPrefab);
+        GameObject rampe;
+        rampname.Add("Rampe Right");
+        rampname.Add("Rampe Left");
+        rampname.Add("Rampe Forward");
+        rampname.Add("Rampe Backward");
 
+        Vector3 positionsol = new Vector3(0, height, 0);
+        ground.transform.position = positionsol;
 
-        Vector3 position = new Vector3(0, height, 0);
-        ground.transform.position = position;
-        ground.transform.localScale = newSize;
+        for (int i = 0; i < (4 - nbrderamp); i++) 
+        {
+            rampe = ground.transform.Find(rampname[i]).gameObject;
+            rampe.SetActive(false);
+        }
     }
 }
